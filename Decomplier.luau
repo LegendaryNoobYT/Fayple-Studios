@@ -3736,7 +3736,6 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 					.. " Executor: "
 					.. (identify_executor and table.concat({ identify_executor() }, " ") or "Unknown")
 					.. "\n]]"
-		Have fun using the file! :3 (https://discord.gg/Gjc39PQKsz)
 			)
 		end
 		do

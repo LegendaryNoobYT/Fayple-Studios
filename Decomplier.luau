@@ -1,7 +1,7 @@
 --!native
 --!optimize 2
 --!divine-intellect
--- https://discord.gg/wx4ThpAsmw
+-- https://discord.gg/wx4ThpAsmw & https://discord.gg/p3MdGT5Nzc
 
 local function string_find(s, pattern)
 	return string.find(s, pattern, nil, true)
@@ -60,7 +60,7 @@ end
 
 local identify_executor = identifyexecutor or getexecutorname or whatexecutor
 
-local EXECUTOR_NAME = identify_executor and identify_executor() or ""
+local EXECUTOR_NAME = “Fayple Studios Executor” --identify_executor and identify_executor() or ""
 
 -- local cloneref = global_container.cloneref
 local gethiddenproperty = global_container.gethiddenproperty
@@ -3481,7 +3481,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 													and instance:IsA("Script")
 													and instance.RunContext ~= Enum.RunContext.Client
 											then
-												value = "-- [FilteringEnabled] Server Scripts are IMPOSSIBLE to save, srry ;(" -- TODO: Could be not just server scripts in the future
+												value = "-- [FilteringEnabled] Currently, Server Scripts are IMPOSSIBLE to save" -- TODO: Could be not just server scripts in the future
 											else
 												value = ldecompile(instance)
 												if SaveBytecode then
@@ -3493,7 +3493,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 											end
 										end
 
-										value = "-- Saved by Fayple Studios Decomplier (Join to Copy Games) https://discord.gg/Gjc39PQKsz\n\n"
+										value = "-- Saved by Fayple Studios Decomplier (Join for best games files) https://discord.gg/p3MdGT5Nzc\n\n"
 											.. (hasLinkedSource and "-- Original Source: https://assetdelivery.roblox.com/v1/asset/?" .. (LinkedSource_type or "id") .. "=" .. (LinkedSource or LinkedSource_Url) .. "\n\n" or "")
 											.. value
 									end
@@ -3688,12 +3688,13 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 						RecoveredScripts
 					) .. "\n" or "")
 					.. [[
-		Thank you for using Fayple Studios Decoplier (mdded UniversalSynSaveInstance) (Join to get Best files) https://discord.gg/Gjc39PQKsz
+		Thank you for using Fayple Studios Decomplier (Join for best games files) https://discord.gg/p3MdGT5Nzc.
+Shoutout to UniversalSynSaveInstance!
 
 		If you didn't save in Binary (rbxl) - it's recommended to save the game right away to take advantage of the binary format & to preserve values of certain properties if you used IgnoreDefaultProperties setting (as they might change in the future).
 		You can do that by going to FILE -> Save to File As -> Make sure File Name ends with .rbxl -> Save
 
-		ServerStorage, ServerScriptService and Server Scripts are IMPOSSIBLE to save because of FilteringEnabled :(
+		ServerStorage, ServerScriptService and Server Scripts are IMPOSSIBLE to save because of FilteringEnabled.
 
 		If your player cannot spawn into the game, please move the scripts in StarterPlayer somewhere else or delete them. Then run `game:GetService("Players").CharacterAutoLoads = true`.
 		And use "Play Here" to start game instead of "Play" to spawn your Character where your Camera currently is.
@@ -3753,7 +3754,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 		end
 
 		savebuffer[savebuffer_size] =
-			"</roblox><!- Saved by Fayple Studios Decomplier (Join to Copy Games) https://discord.gg/Gjc39PQKsz -->"
+			"</roblox><!-- Saved by Fayple Studios Decomplier (Join for best games files) https://discord.gg/p3MdGT5Nzc -->"
 		savebuffer_size += 1
 		save_cache(true)
 		do
@@ -4020,7 +4021,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	end
 
 	do
-		if true then
+		if SafeMode then
 			task.spawn(function()
 				local LocalPlayer = GetLocalPlayer()
 
@@ -4205,7 +4206,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 			return debug.traceback(err)
 		end)
 
-		if true then
+		if SafeMode then
 			pcall(function()
 				local max = 5
 				task.delay(
@@ -4256,3 +4257,4 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 end
 
 return synsaveinstance
+

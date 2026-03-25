@@ -4020,7 +4020,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	end
 
 	do
-		if SafeMode then
+		if true then
 			task.spawn(function()
 				local LocalPlayer = GetLocalPlayer()
 
@@ -4205,7 +4205,7 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 			return debug.traceback(err)
 		end)
 
-		if SafeMode then
+		if true then
 			pcall(function()
 				local max = 5
 				task.delay(

@@ -2259,8 +2259,8 @@ local GLOBAL_ENV = getgenv and getgenv() or _G or shared
 	Saves instances with specified options. Example:
 	```lua
 	local Params = {
-		RepoURL = "https://raw.githubusercontent.com/luau/UniversalSynSaveInstance/main/",
-		SSI = "saveinstance",
+		RepoURL = "https://raw.githubusercontent.com/LegendaryNoobYT/Fayple-Studios/refs/heads/main",
+		SSI = "Decomplier",
 	}
 
 	local synsaveinstance = loadstring(game:HttpGet(Params.RepoURL .. Params.SSI .. ".luau", true), Params.SSI)()

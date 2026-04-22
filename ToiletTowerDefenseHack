@@ -1,0 +1,31 @@
+local TextChatService = game:GetService("TextChatService")
+local LocalPlayer = game.Players.LocalPlayer
+
+local Notifications = LocalPlayer.PlayerGui.MainFrames.Notifications
+local t = Notifications.NotificationHandler.SuccessNotification:Clone()
+t.TextLabel.Text = "Code successfuly activated!"
+t.Parent = Notifications
+t.Visible = true
+
+LocalPlayer.PlayerGui.CustomMatchUI.Enabled = true
+
+local function Color3ToHex(color)
+ local r = math.floor(color.R * 255)
+ local g = math.floor(color.G * 255)
+ local b = math.floor(color.B * 255)
+ return string.format("#%02X%02X%02X", r, g, b)
+end
+
+local function MakeTextUse(Color, Text)
+ return '<font color="' .. Color3ToHex(Color) .. '">' .. Text .. '</font>'
+end
+
+local function Message(Color, Text)
+ TextChatService.TextChannels.RBXGeneral:DisplaySystemMessage(MakeTextUse(Color, Text))
+end
+
+Message(Color3.new(0, 1, 0), ("[SYSTEM] %s activated Secret code and now he can create custom match! You can get your code in Social Links!"):format(LocalPlayer.Name))
+
+wait(5)
+
+t:Destroy()

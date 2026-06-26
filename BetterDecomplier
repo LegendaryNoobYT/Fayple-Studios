@@ -3026,6 +3026,15 @@ local function synsaveinstance(CustomOptions, CustomOptions2)
 	local IsolatePlayers = OPTIONS.IsolatePlayers
 	local IsolateStarterPlayer = OPTIONS.IsolateStarterPlayer
 	local NilInstances = OPTIONS.NilInstances
+	local FolderToDecompliePlayerUI = OPTIONS.PlayerGuiFolder
+
+	if FolderToDecomplieUI then
+		local SpecialFolderThatFaypleStudiosAdded = Instance.new("Folder", game.Workspace)
+		SpecialFolderThatFaypleStudiosAdded.Name = "PlayerGUI"
+		for _, GuiThatFaypleStudiosAdded in game.Players.LocalPlayer.PlayerGui:GetChildren() do
+			GuiThatFaypleStudiosAdded.Parent = SpecialFolderThatFaypleStudiosAdded
+		end
+	end
 
 	if NilInstances and enablenilinstances then -- ? Solara fix
 		enablenilinstances()

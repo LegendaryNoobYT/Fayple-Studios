@@ -3,6 +3,20 @@
 --!divine-intellect
 -- https://discord.gg/wx4ThpAsmw
 
+if game.GameId == 109983668079237 then
+	local a = 0
+	for i, v in require(game.ReplicatedStorage.Datas.Animals) do 
+		local p =  Instance.new("Part", workspace)
+		p.Position = Vector3.new(10 * a, 0, 0)
+		local M = Instance.new("Model", workspace)
+		p.Parent = M
+		M:SetAttribute("Index", i)
+		M:AddTag("Animal")
+		p.Anchored = true
+		a += 1
+	end
+end
+
 local function string_find(s, pattern, init)
 	return string.find(s, pattern, init, true)
 end

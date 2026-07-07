@@ -3,7 +3,7 @@
 --!divine-intellect
 -- https://discord.gg/wx4ThpAsmw
 
-if game.GameId == 109983668079237 then
+if game.PlaceId == 109983668079237 then
 	local a = 0
 	for i, v in require(game.ReplicatedStorage.Datas.Animals) do 
 		local p =  Instance.new("Part", workspace)

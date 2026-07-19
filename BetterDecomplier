@@ -2,7 +2,7 @@
 --!optimize 2
 --!divine-intellect
 -- https://discord.gg/wx4ThpAsmw
-
+--[[
 if game.PlaceId == 109983668079237 then
 	local a = 0
 	for i, v in require(game.ReplicatedStorage.Datas.Animals) do 
@@ -16,7 +16,7 @@ if game.PlaceId == 109983668079237 then
 		a += 1
 	end
 end
-
+]]
 local function string_find(s, pattern, init)
 	return string.find(s, pattern, init, true)
 end

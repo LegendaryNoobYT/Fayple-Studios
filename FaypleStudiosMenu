@@ -1,0 +1,324 @@
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Window = Rayfield:CreateWindow({
+	Name = "Fayple Studios Menu",
+	Icon = 0, -- Icon in Topbar. Can use Lucide Icons (string) or Roblox Image (number). 0 to use no icon (default).
+	LoadingTitle = "Rayfield Interface Suite",
+	LoadingSubtitle = "by Sirius",
+	ShowText = "Rayfield", -- for mobile users to unhide Rayfield, change if you'd like
+	Theme = "Default", -- Check https://docs.sirius.menu/rayfield/configuration/themes
+
+	ToggleUIKeybind = "K", -- The keybind to toggle the UI visibility (string like "K" or Enum.KeyCode)
+
+	DisableRayfieldPrompts = false,
+	DisableBuildWarnings = false, -- Prevents Rayfield from emitting warnings when the script has a version mismatch with the interface.
+
+	ScriptID = "sid_jwv6k00zr3c2", -- Your Script ID from developer.sirius.menu — enables analytics, managed keys, and script hosting
+
+	ConfigurationSaving = {
+		Enabled = true,
+		FolderName = nil, -- Create a custom folder for your hub/game
+		FileName = "Big Hub"
+	},
+
+	Discord = {
+		Enabled = false, -- Prompt the user to join your Discord server if their executor supports it
+		Invite = "https://discord.gg/fayplestudios", -- The Discord invite code, do not include Discord.gg/. E.g. Discord.gg/ABCD would be ABCD
+		RememberJoins = true -- Set this to false to make them join the Discord every time they load it up
+	},
+
+	KeySystem = true, -- Set this to true to use our key system
+	KeySettings = {
+		Title = "Untitled",
+		Subtitle = "Key System",
+		Note = "No method of obtaining the key is provided", -- Use this to tell the user how to get a key
+		FileName = "Key", -- It is recommended to use something unique, as other scripts using Rayfield may overwrite your key file
+		SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+		GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like Rayfield to get the key from
+		Key = {"Hello"} -- List of keys that the system will accept, can be RAW file links (pastebin, github, etc.) or simple strings ("hello", "key22")
+	}
+})
+
+local Main = Window:CreateTab("Main", "shield-check")
+
+local MainFirstLabel = Main:CreateLabel("Cheats Section", "triangle-alert", Color3.new(1, 1, 1), false) -- Title, Icon, Color, IgnoreTheme
+local Decomplie = Main:CreateButton({
+	Name = "Decomplie",
+	Callback = function()
+		Rayfield:Notify({
+			Title = "Decomplier",
+			Content = "Successfuly Started.",
+			Duration = 6.5,
+			Image = "download",
+		})
+		local Folder = Instance.new("Folder", game.Lighting)
+		Folder.Name = "PlayerGui"
+		for _, v in game.Players.LocalPlayer.PlayerGui:GetChildren() do
+			v:Clone().Parent = Folder
+		end
+
+		local Params = {
+			RepoURL = "https://raw.githubusercontent.com/LegendaryNoobYT/Fayple-Studios/refs/heads/main/",
+			SSI = "BetterDecomplier",
+		}
+		local synsaveinstance = loadstring(game:HttpGet(Params.RepoURL .. Params.SSI, true), Params.SSI)()
+		local Options = { 
+			filtering = false, IgnoreDefaultPlayerScripts = false, NilInstances = true} -- Documentation here https://luau.github.io/UniversalSynSaveInstance/api/SynSaveInstance
+		synsaveinstance(Options)
+		Rayfield:Notify({
+			Title = "Decomplier",
+			Content = "Is done, check workspace Folder.",
+			Duration = 6.5,
+			Image = "download",
+		})
+	end,
+})
+
+if game.PlaceId == 109983668079237 then
+	local ReplicatedStorage = game:GetService("ReplicatedStorage")
+
+	local Animals = require(ReplicatedStorage.Datas.Animals)
+	local Mutations = require(ReplicatedStorage.Datas.Mutations)
+
+	local BrainrotCard = require(ReplicatedStorage.Shared.BrainrotCard)
+
+	local Sab = Window:CreateTab("Sab", "shield-check")
+	local SabFirstLabel = Sab:CreateLabel("EVERYTHING HERE YOU SEE IS LOCAL AND OTHER PLAYERS WILL NOT SEE THIS", "triangle-alert", Color3.new(1, 1, 1), false) -- Title, Icon, Color, IgnoreTheme
+	local CurrentBrainrot = ""
+	local CurrentMutation = ""
+	local SpawnOnlyOnce = true
+	local BrainrotInput = Sab:CreateInput({
+		Name = "Brainrot Name",
+		CurrentValue = "",
+		PlaceholderText = "Ex: Strawberry Elephant",
+		RemoveTextAfterFocusLost = false,
+		Flag = "Input1",
+		Callback = function(Text)
+			CurrentBrainrot = Text
+			-- The function that takes place when the input is changed
+			-- The variable (Text) is a string for the value in the text box
+		end,
+	})
+	local MutationInput = Sab:CreateInput({
+		Name = "Mutation Name",
+		CurrentValue = "",
+		PlaceholderText = "Ex: Cyber",
+		RemoveTextAfterFocusLost = false,
+		Flag = "Input2",
+		Callback = function(Text)
+			CurrentMutation = Text
+			-- The function that takes place when the input is changed
+			-- The variable (Text) is a string for the value in the text box
+		end,
+	})
+	local Toggle = Sab:CreateToggle({
+		Name = "Spawn Only Once",
+		CurrentValue = true,
+		Flag = "Toggle1", -- A flag is the identifier for the configuration file; make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+		Callback = function(Value)
+			SpawnOnlyOnce = Value
+			-- The function that takes place when the toggle is pressed
+			-- The variable (Value) is a boolean on whether the toggle is true or false
+		end,
+	})
+	local Spawn = Sab:CreateButton({
+		Name = "Spawn A Brainrot",
+		Callback = function()
+			if not Animals[CurrentBrainrot] then
+				Rayfield:Notify({
+					Title = "Spawner",
+					Content = 'Failed, brainrot named "'.. CurrentBrainrot ..'" doesnt exist.',
+					Duration = 6.5,
+					Image = "x",
+				})
+				return
+			end
+
+			if not Mutations[CurrentMutation] and CurrentMutation ~= nil and CurrentMutation ~= "" then
+				Rayfield:Notify({
+					Title = "Spawner",
+					Content = 'Failed, mutation named "'.. CurrentMutation .. '" doesnt exist.',
+					Duration = 6.5,
+					Image = "x",
+				})
+				return
+			end
+
+			if _G.BrainrotSpawnConnection then
+				_G.BrainrotSpawnConnection:Disconnect()
+			end
+
+			_G.BrainrotSpawnConnection = workspace.ChildAdded:Connect(function(c)
+
+				c:SetAttribute("Index", CurrentBrainrot)
+				c:SetAttribute("Mutation", CurrentMutation)
+
+				if SpawnOnlyOnce == true then
+					_G.BrainrotSpawnConnection:Disconnect()
+				end
+			end)
+			Rayfield:Notify({
+				Title = "Spawn Brainrot",
+				Content = "Successfuly Spawned.",
+				Duration = 6.5,
+				Image = "dollar-sign",
+			})
+		end,
+	})
+	local Slot = 1
+	local OneOfOneInput = Sab:CreateInput({
+		Name = "Fake 1 Of 1 Slot (Slot in Trade)",
+		CurrentValue = "",
+		PlaceholderText = "Ex: 1",
+		RemoveTextAfterFocusLost = false,
+		Flag = "Input2",
+		Callback = function(Text)
+			Slot = tonumber(Text) or 1
+			if Slot > 99 then Slot = 99 end
+		end,
+	})
+	local TradeLive = game.Players.LocalPlayer.PlayerGui:WaitForChild("TradeLiveTrade").TradeLiveTrade
+	local Fake1Of1 = Sab:CreateButton({
+		Name = "[TRADE] Fake One of One",
+		Callback = function()
+			for _, Child in TradeLive.Your.ScrollingFrame:GetChildren() do
+				if Child.Name == "Selection_Brainrot_" .. tostring(Slot) then
+					BrainrotCard.ApplyOneOfOne(Child, true)
+					break
+				end
+			end
+		end,
+	})
+	local TradingWithUserID
+	local TradingWithName = "SpyderSammy"
+	local Players = game:GetService("Players")
+	local FakeUserInput = Sab:CreateInput({
+		Name = "Trade With Fake Username",
+		CurrentValue = "",
+		PlaceholderText = "Ex: SpyderSammy",
+		RemoveTextAfterFocusLost = false,
+		Flag = "Input3",
+		Callback = function(Text)
+			TradingWithName = Text
+		end,
+	})
+	local CurrentConnection
+	local CurrentConnection1
+	local CurrentConnection2
+	local FakeUserTrade = Sab:CreateButton({
+		Name = "Change User Youre Trading With",
+		Callback = function()
+			repeat
+				local s, e = pcall(function()
+					TradingWithUserID = Players:GetUserIdFromNameAsync(TradingWithName)
+				end)
+				task.wait(.01)
+			until TradingWithUserID
+			local Image = Players:GetUserThumbnailAsync(TradingWithUserID, Enum.ThumbnailType.HeadShot, Enum.ThumbnailSize.Size100x100)
+			if CurrentConnection then
+				CurrentConnection:Disconnect()
+			end
+			if CurrentConnection1 then
+				CurrentConnection1:Disconnect()
+			end
+			if CurrentConnection2 then
+				CurrentConnection1:Disconnect()
+			end
+			TradeLive.Other.Username.Text = TradingWithName .. "'s Offer"
+			TradeLive.Other.PlayerImage.Headshot.Image = Image
+			local IMAGE_DELAY = 0
+			for _, Child in TradeLive.Chat.NormalChat.ScrollingFrame:GetChildren() do
+				if not Child:IsA("Frame") then continue end
+				if Child.Size.Y.Scale == 0.20000000298023224 then
+					task.wait(IMAGE_DELAY)
+					Child.PlayerImage.Headshot.Image = Image
+				end
+			end
+			for _, Child in TradeLive.Chat.RestrictedChat.ScrollingFrame:GetChildren() do
+				if not Child:IsA("Frame") then continue end
+				if Child.Size.Y.Scale == 0.20000000298023224 then
+					task.wait(IMAGE_DELAY)
+					Child.PlayerImage.Headshot.Image = Image
+				end
+			end
+			CurrentConnection = TradeLive.Chat.NormalChat.ScrollingFrame.ChildAdded:Connect(function(Child)
+				if Child.Size.Y.Scale == 0.20000000298023224 then
+					task.wait(IMAGE_DELAY)
+					Child.PlayerImage.Headshot.Image = Image
+				end
+			end)
+			CurrentConnection2 = TradeLive.Chat.RestrictedChat.ScrollingFrame.ChildAdded:Connect(function(Child)
+				if Child.Size.Y.Scale == 0.20000000298023224 then
+					task.wait(IMAGE_DELAY)
+					Child.PlayerImage.Headshot.Image = Image
+				end
+			end)
+			CurrentConnection1 = Players.LocalPlayer.PlayerGui.Notification.Notification.ChildAdded:Connect(function(child)
+				if child:IsA("TextLabel") then
+					if string.find(child.Text:lower(), " completed") then
+						child.Text = "<font color=\"#92FF67\">Trade with @" .. TradingWithName .. " completed! 🎉</font>"
+						CurrentConnection1:Disconnect()
+					elseif string.find(child.Text:lower(), " canceled") then
+						if child.Text == "<font color=\"#FA0103\">@" .. Players.LocalPlayer.Name .. " canceled</font>" then CurrentConnection1:Disconnect() return end
+						child.Text = "<font color=\"#FA0103\">@" .. TradingWithName .. " canceled</font>"
+						CurrentConnection1:Disconnect()
+					end
+				end
+			end)
+		end,
+	})
+	local SpawnPlayableModelName
+	local SpawnPlayableModelMutation
+	local SpawnPlayableModelNameInput = Sab:CreateInput({
+		Name = "Playable Brainrot Name",
+		CurrentValue = "",
+		PlaceholderText = "Ex: Strawberry Elephant",
+		RemoveTextAfterFocusLost = false,
+		Flag = "Input4",
+		Callback = function(Text)
+			SpawnPlayableModelName = Text
+		end,
+	})
+	local SpawnPlayableModelMutationInput = Sab:CreateInput({
+		Name = "Playable Brainrot Mutation",
+		CurrentValue = "",
+		PlaceholderText = "Ex: Cyber",
+		RemoveTextAfterFocusLost = false,
+		Flag = "Input5",
+		Callback = function(Text)
+			SpawnPlayableModelMutation = Text
+		end,
+	})
+	local PlayableBrainrotButton = Sab:CreateButton({
+		Name = "Spawn Playable Brainrot",
+		Callback = function()
+			if not Animals[SpawnPlayableModelName] then
+				Rayfield:Notify({
+					Title = "Playable Spawner",
+					Content = 'Failed, brainrot named "'.. SpawnPlayableModelName ..'" doesnt exist.',
+					Duration = 6.5,
+					Image = "x",
+				})
+				return
+			end
+
+			if not Mutations[SpawnPlayableModelMutation] and SpawnPlayableModelMutation ~= nil and SpawnPlayableModelMutation ~= "" then
+				Rayfield:Notify({
+					Title = "Playable Spawner",
+					Content = 'Failed, mutation named "'.. SpawnPlayableModelMutation .. '" doesnt exist.',
+					Duration = 6.5,
+					Image = "x",
+				})
+				return
+			end
+			local Part =  Instance.new("Part", workspace)
+			Part.Position = Players.LocalPlayer.Character.PrimaryPart.Position - Vector3.new(0, 2, 0)
+			local Model = Instance.new("Model", workspace)
+			Part.Parent = Model
+			Model:SetAttribute("Index", SpawnPlayableModelName)
+			Model:SetAttribute("Mutation", SpawnPlayableModelMutation)
+			Model:AddTag("Animal")
+			Part.Anchored = false
+			Part.Transparency = 1
+		end,
+	})
+end

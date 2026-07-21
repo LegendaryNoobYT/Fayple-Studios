@@ -150,7 +150,7 @@ if game.PlaceId == 109983668079237 then
 			_G.BrainrotSpawnConnection = workspace.ChildAdded:Connect(function(c)
 
 				c:SetAttribute("Index", CurrentBrainrot)
-				c:SetAttribute("Mutation", CurrentMutation)
+				if CurrentMutation and CurrentMutation ~= "" then c:SetAttribute("Mutation", CurrentMutation) end
 
 				if SpawnOnlyOnce == true then
 					_G.BrainrotSpawnConnection:Disconnect()
